@@ -51,7 +51,7 @@ L'obiettivo principale è creare una community attiva dove gli utenti possano co
 
 \`\`\`bash
 # Clona il repository
-git clone https://github.com/tuousername/Onirium.git
+git clone https://github.com/Ninfa-C/Onirium.git
 
 # Naviga nella directory del progetto
 cd Onirium
