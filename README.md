@@ -1,7 +1,7 @@
 # 🐉 Onirium
 
 <p align="center">
-  <img src="docs/logo.png" alt="Onirium Logo" width="400" />
+  <img src="docs/logo.png" alt="Onirium Logo" width="200" />
   <br>
   <em>La tua avventura inizia qui</em>
 </p>
