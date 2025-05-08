@@ -1,0 +1,11 @@
+export { default as ButtonDecor } from './ButtonDecor.svg?react';
+export { default as Corner } from './Corner.svg?react';
+export { default as HalfRounded } from './Half-Rounded.svg?react';
+export { default as MiddleDecor } from './UpCenterSimple.svg?react';
+export { default as MiddleDecor2 } from './UpFront.svg?react';
+export { default as LineDecoration } from './LineDecoration.svg?react';
+export { default as SquareDecor } from './SquareDecor.svg?react';
+export { default as RectangleDecor } from './RectangleDecor.svg?react';
+export { default as Runes } from './Runes.svg?react';
+export { default as ECircle } from './ExternalCircle.svg?react';
+export { default as ICircle } from './InternalCircle.svg?react';

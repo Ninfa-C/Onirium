@@ -1,0 +1,13 @@
+export { default as Acido } from './Acido.svg?react';
+export { default as Contundenti } from './Contundente.svg?react';
+export { default as Forza } from './Forza.svg?react';
+export { default as Freddo } from './Freddo.svg?react';
+export { default as Fulmine } from './Fulmine.svg?react';
+export { default as Fuoco } from './Fuoco.svg?react';
+export { default as Necro } from './Necrotici.svg?react';
+export { default as Perforanti } from './Perforanti.svg?react';
+export { default as Psi } from './Psichici.svg?react';
+export { default as Radiante } from './Radianti.svg?react';
+export { default as Taglienti } from './tagliente.svg?react';
+export { default as Tuono } from './Tuono.svg?react';
+export { default as Veleno } from './Veleno.svg?react';

@@ -1,0 +1,140 @@
+# Logs
+**/logs/
+**/*.log
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+**/pnpm-debug.log*
+**/lerna-debug.log*
+
+# Runtime and cache folders
+**/node_modules/
+**/dist/
+**/dist-ssr/
+**/.vite/
+**/.cache/
+**/.temp/
+
+# Local environment files
+**/*.local
+**/.env
+**/.env.*.local
+
+# Editor directories and files
+**/.vscode/
+!**/.vscode/extensions.json
+**/.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Package manager lock files
+**/package-lock.json
+**/yarn.lock
+**/pnpm-lock.yaml
+
+# Public/generated assets
+**/public/assets/
+**/src/assets/images/
+
+# Visual Studio specific
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.userprefs
+mono_crash.*
+.vs/
+Generated\ Files/
+**/[Dd]ebug*/
+**/[Rr]elease*/
+x64/
+x86/
+[Aa][Rr][Mm]*/
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+[Ll]og/
+[Ll]ogs/
+*.pdb
+*.ipdb
+*.sdf
+*.dbmdl
+*.dbproj.schemaview
+*.cache
+*.VC.db
+*.VC.VC.opendb
+*.plg
+*.opt
+*.vbw
+*.tss
+*.btp.cs
+*.tmp
+*.binlog
+*.nvuser
+*.jmconfig
+*.rdl.data
+*.rptproj.*
+*.bim.*
+*.mdf
+*.ldf
+*.ndf
+*.appx
+*.appxbundle
+*.appxupload
+AppPackages/
+BundleArtifacts/
+publish/
+MigrationBackup/
+ServiceFabricBackup/
+FakesAssemblies/
+.localhistory/
+.ionide/
+OpenCover/
+.healthchecksdb
+.healthchecksdb/
+
+# ReSharper, Rider, CodeRush
+_ReSharper*/
+*.DotSettings.user
+.cr/personal
+
+# NuGet
+*.nupkg
+*.snupkg
+**/packages/*
+!**/packages/build/
+*.nuget.props
+*.nuget.targets
+
+# Build tools & frameworks
+artifacts/
+*.build.csdef
+*.publishproj
+*.azurePubxml
+*.pubxml
+*.rptproj.bak
+
+# Coverage tools
+coverage*.json
+coverage*.xml
+coverage*.info
+*.coverage
+*.coveragexml
+*.dotCover
+
+# Python Tools (used in some Visual Studio extensions)
+__pycache__/
+*.pyc
+
+# Miscellaneous
+~$*
+*~
+*.tmp_proj
+*.bak
+*.jfm
+*.meta
+orleans.codegen.cs
