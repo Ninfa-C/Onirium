@@ -98,9 +98,7 @@ const Personaggi = ({ campaign }) => {
                               )}
                               <div className="flex justify-end mt-2 gap-2">
                                 <Button
-                                  variant="outline"
-                                  size="sm"
-                                  className="border-gold/30 text-gold hover:bg-gold/10"
+                                  className="border border-gold/30 text-gold hover:bg-gold/10 h-8"
                                 >
                                   <Pencil className="h-3 w-3 mr-1" /> Modifica
                                 </Button>

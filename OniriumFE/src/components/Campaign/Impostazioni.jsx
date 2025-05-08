@@ -37,6 +37,7 @@ const Impostazioni = ({
     description: campaign.description,
   });
   const navigateTo = useNavigate();
+  
   const handleDelete = async (e) => {
     setError(false);
     e.preventDefault();

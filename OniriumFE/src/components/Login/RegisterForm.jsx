@@ -113,6 +113,7 @@ const Register = () => {
                     </label>
                     <div className="relative">
                       <InputWithIcon
+                      
                         icon={<Mailbox />}
                         value={form.email}
                         onChange={(value) => setForm({ ...form, email: value })}
@@ -126,6 +127,7 @@ const Register = () => {
                     </label>
                     <div className="relative">
                       <InputWithIcon
+                        type={showPassword ? "text" : "password"}
                         icon={<Lock />}
                         value={form.password}
                         onChange={(value) =>
@@ -152,6 +154,7 @@ const Register = () => {
                     </label>
                     <div className="relative">
                       <InputWithIcon
+                        type={showPassword2 ? "text" : "password"}
                         icon={<Lock />}
                         value={form.confirmPassword}
                         onChange={(value) =>

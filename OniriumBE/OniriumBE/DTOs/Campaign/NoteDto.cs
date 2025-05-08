@@ -10,5 +10,6 @@
         public IFormFile? Image { get; set; } = null;
         public bool MasterOnly { get; set; }
         public string? ImageString { get; set; } = null;
+        public string? Createdby { get; set; } = "";
     }
 }

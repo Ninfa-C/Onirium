@@ -324,6 +324,30 @@ namespace OniriumBE.Services
             }
         }
 
+        public async Task<bool> UpdateCharLif(Guid charId, int total, int current, int temp)
+        {
+            try
+            {
+                var character = await _context.CampaignCharacters
+                    .FirstOrDefaultAsync(c => c.Id == charId);
+
+                if (character == null)
+                {
+                    throw new KeyNotFoundException("Character not found.");
+                }
+                
+                character.TotalLifePoints = total;
+                character.CurrentLifePoints = current;
+                character.TemporaryLifePoints =temp;
+
+                return await _services.SaveAsync();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Errore durante l'aggiornamento");
+                return false;
+            }
+        }
 
 
     }

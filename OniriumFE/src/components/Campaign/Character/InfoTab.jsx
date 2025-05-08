@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   LineDecoration,
   RectangleDecor,
@@ -5,8 +6,24 @@ import {
 } from "../../../assets/decoration";
 import { CardContent } from "../../Generic/Cards";
 import { TabsContent } from "../../Generic/Tabs";
+import { InputForm } from "../../Generic/Form";
+import { Button } from "../../Generic/ButtonCustom";
+import { updateLifeChar } from "../../../api/CampaignApi";
+import { useDispatch, useSelector } from "react-redux";
+import { getCharacterAssign } from "../../../redux/slices/characterDetailsSlice";
 
 const InfoTab = ({ character }) => {
+  const characterAssign = useSelector(
+    (state) => state.characterDetails.characterAssign
+  );
+  const dispatch = useDispatch();
+  const [form, setForm] = useState({
+    total: character?.totalLifePoints,
+    current: character?.currentLifePoints,
+    temporary: character?.temporaryLifePoints,
+  });
+  const [editing, setEditing] = useState(false);
+
   const equippedArmor = character?.inventory[0]?.items?.find(
     (item) => item.isEquiped && item.category === "Armatura"
   );
@@ -134,11 +151,11 @@ const InfoTab = ({ character }) => {
   const fullProficiencies = character?.classes[0]?.classProficiencies || [];
 
   const multiclassProficiencies = Array.isArray(character?.classes)
-  ? character.classes.slice(1).flatMap((c) => {
-      const multiclasse = multiclassProficienciesTable?.[c.type];
-      return Array.isArray(multiclasse) ? multiclasse : [];
-    })
-  : [];
+    ? character.classes.slice(1).flatMap((c) => {
+        const multiclasse = multiclassProficienciesTable?.[c.type];
+        return Array.isArray(multiclasse) ? multiclasse : [];
+      })
+    : [];
   const allProficiencies = [...fullProficiencies, ...multiclassProficiencies];
 
   const uniqueProficiencies = allProficiencies.reduce((acc, curr) => {
@@ -147,6 +164,27 @@ const InfoTab = ({ character }) => {
     }
     return acc;
   }, []);
+
+  const handleSaveEdit = async () => {
+    const unchanged =
+      character.totalLifePoints === form.total &&
+      character.currentLifePoints === form.current &&
+      character.temporaryLifePoints === form.temporary 
+
+    if (unchanged) {
+      setEditing(false);
+      return;
+    }
+    try {
+      await updateLifeChar(character.id, form);
+      dispatch(getCharacterAssign(characterAssign.id));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+
+
 
   return (
     <TabsContent className="p-6 space-y-3" value="info">
@@ -196,7 +234,10 @@ const InfoTab = ({ character }) => {
           <h3 className="text-gold text-xl font-medium mb-2">Abilità</h3>
           <div className="grid grid-cols-1 gap-x-5">
             {skills?.map((skill, index) => (
-              <div className="flex justify-between items-center border-b border-gold/10" key={index}>
+              <div
+                className="flex justify-between items-center border-b border-gold/10"
+                key={index}
+              >
                 <p
                   key={index}
                   className={`py-1 border-b border-gold/10 ${
@@ -225,15 +266,91 @@ const InfoTab = ({ character }) => {
             <p>Iniziativa</p>
             <p>{dexModifier}</p>
           </div>
-          <div className="flex justify-between border-b border-gold/30 mb-3">
-            <p>Punti Ferita</p>
-            <p>{character?.currentLifePoints}/{character?.totalLifePoints}</p>
-          </div>
-          <div className="flex justify-between border-b border-gold/30 mb-10">
-            <p>Punti Ferita Temporanei</p>
-            <p>{character?.temporaryLifePoints}</p>
-          </div>
           <div>
+            <div>
+              <div className="flex justify-between mb-3 items-center">
+                <h3 className="text-gold text-xl font-medium">
+                  Punti ferita
+                </h3>
+                {!editing ? (
+                  <Button
+                    className="h-8 border border-gold/40 text-gold hover:bg-gold/10 hover:text-gold-light"
+                    onClick={() => setEditing(true)}
+                  >
+                    Modifica
+                  </Button>
+                ) : <Button
+                className="h-8 border border-gold/40 text-gold hover:bg-gold/10 hover:text-gold-light"
+                onClick={handleSaveEdit}
+              >
+                Salva
+              </Button>}
+              </div>
+              <div className="flex justify-between border-b border-gold/30 mb-3 items-center">
+                <p>Punti Ferita</p>
+                {editing ? (
+                  <div className="flex">
+                    <InputForm
+                      type="number"
+                      autofill="off"
+                      id="new"
+                      value={form.current}
+                      onChange={(e) =>
+                        setForm({
+                          ...form,
+                          current: e.target.value,
+                        })
+                      }
+                      placeholder={character.currentLifePoints}
+                      className="mb-1 h-6  border-none bg-gold/10 rounded-none text-white w-10 no-spinner"
+                    />
+                    <span>/</span>
+                    <InputForm
+                      type="number"
+                      autofill="off"
+                      id="new"
+                      value={form.total}
+                      onChange={(e) =>
+                        setForm({
+                          ...form,
+                          total: e.target.value,
+                        })
+                      }
+                      placeholder={character.totalLifePoints}
+                      className="h-6  border-none bg-gold/10 rounded-none text-white w-10 no-spinner"
+                    />
+                  </div>
+                ) : (
+                  <p>
+                    {character?.currentLifePoints}/{character?.totalLifePoints}
+                  </p>
+                )}
+              </div>
+              <div className="flex justify-between border-b border-gold/30 mb-10">
+                <p>Punti Ferita Temporanei</p>
+                {editing ? (
+                  <div>
+                    <InputForm
+                      type="number"
+                      autofill="off"
+                      id="new"
+                      value={form.temporary}
+                      onChange={(e) =>
+                        setForm({
+                          ...form,
+                          temporary: e.target.value,
+                        })
+                      }
+                      placeholder={character.temporaryLifePoints}
+                      className="h-6 mb-1 border-none bg-gold/10 rounded-none text-white w-10 no-spinner"
+                    />
+                  </div>
+                ) : (
+                  <p>{character?.temporaryLifePoints}</p>
+                )}
+              </div>
+            </div>
+
             <h3 className="text-gold text-xl font-medium mb-3">
               Tiri Salvezza
             </h3>
@@ -259,7 +376,7 @@ const InfoTab = ({ character }) => {
             <h3 className="text-gold text-xl font-medium mb-2">
               Altre Competenze
             </h3>
-           
+
             <div className="space-y-4">
               <div>
                 <h4 className="text-sm font-medium mb-1">Armi</h4>
@@ -290,7 +407,7 @@ const InfoTab = ({ character }) => {
                       {prof.description}
                     </p>
                   ))}
-              </div>             
+              </div>
             </div>
           </div>
         </div>

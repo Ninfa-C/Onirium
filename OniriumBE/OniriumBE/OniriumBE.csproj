@@ -29,6 +29,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="assets\locations\" />
+	  <Folder Include="assets\campaign\" />
+	  <Folder Include="assets\quest\" />
 	  <Folder Include="EmailTemplates\" />
 	</ItemGroup>
 

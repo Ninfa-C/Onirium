@@ -23,5 +23,6 @@ namespace OniriumBE.Models.Shop
         [Required]
         public DateTime LastUpdated { get; set; }
         public ICollection<Variant> Variants { get; set; }
+        public string Tags { get; set; }
     }
 }

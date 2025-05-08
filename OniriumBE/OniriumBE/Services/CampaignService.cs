@@ -1,4 +1,7 @@
-﻿using Microsoft.CodeAnalysis;
+﻿using System.Security.Claims;
+using CustomersManager.Models.Auth;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using OniriumBE.Data;
 using OniriumBE.DTOs.Account;
@@ -365,7 +368,7 @@ namespace OniriumBE.Services
                     {
                         await dto.Image.CopyToAsync(stream);
                     }
-                    webPath = Path.Combine("assets", "images", fileName);
+                    webPath = Path.Combine("assets", "locations", fileName);
                 }
                 var location = new Models.Campaign.Location
                 {
@@ -647,7 +650,7 @@ namespace OniriumBE.Services
         #endregion
 
         #region NotesCRUD
-        public async Task<bool> AddNoteAsync(NoteDto dto, Guid campaignId)
+        public async Task<bool> AddNoteAsync(NoteDto dto, Guid campaignId, string userId)
         {
             try
             {
@@ -672,6 +675,7 @@ namespace OniriumBE.Services
                     IsVisible = dto.IsVisible,
                     Image = webPath,
                     MasterOnly = dto.MasterOnly,
+                    Createdby = userId,
                 };
 
                 _context.CampaignNotes.Add(note);
@@ -696,6 +700,8 @@ namespace OniriumBE.Services
                     IsVisible = n.IsVisible,
                     ImageString = n.Image,
                     MasterOnly = n.MasterOnly,
+                    Createdby = n.Createdby,
+
                 })
                 .ToListAsync();
         }
@@ -715,6 +721,7 @@ namespace OniriumBE.Services
                 IsVisible = result.IsVisible,
                 ImageString = result.Image,
                 MasterOnly = result.MasterOnly,
+                Createdby = result.Createdby,
             };
         }
         public async Task<bool> UpdateNoteAsync(NoteDto dto)

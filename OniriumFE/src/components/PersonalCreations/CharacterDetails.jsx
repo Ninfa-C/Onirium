@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { AlertDialog } from "radix-ui";
 import {
   clearCharacterDetails,
   getCharacterDetails,
@@ -20,13 +21,28 @@ import AbilitiesTab from "./AbilitiesTab";
 import EquipTab from "./EquipTab";
 import SpellsTab from "./SpellsTab";
 import OniriumLoader from "../Generic/OniriumLoader";
+import { deleteCharacter } from "../../api/CampaignApi";
 
 const CharacterDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { character, loading, error } = useSelector(
+  const [error, setError] = useState(false);
+  const { character, loading } = useSelector(
     (state) => state.characterDetails
   );
+  const navigateTo = useNavigate();
+  
+  const handleDelete = async (e) => {
+    setError(false);
+    e.preventDefault();
+    try {
+      await deleteCharacter(character.id);
+      navigateTo("/Creations");
+    } catch {
+      setError(true);
+    }
+  };
+  
 
   const equippedArmor = character?.inventory[0]?.items?.find(
     (item) => item.isEquiped && item.category === "Armatura"
@@ -122,12 +138,51 @@ const CharacterDetails = () => {
               >
                 <Pencil className="mr-2 h-4 w-4" /> Modifica
               </button>
-              <button
+              {/* <button
                 type="button"
                 className="bg-gold/20 hover:bg-gold/30 text-gold border border-gold/30  flex items-center hover:cursor-pointer px-2 py-1"
               >
                 <Share className="mr-2 h-4 w-4" /> Condividi
-              </button>
+              </button> */}
+              <AlertDialog.Root>
+              <AlertDialog.Trigger asChild>
+                <button className="inline-flex h-[35px] items-center justify-center rounded bg-red-500/30 px-[15px] font-medium leading-none outline-none outline-offset-1 hover:bg-red-500/50 focus-visible:outline-2 cursor-pointer select-none">
+                 Elimina Eroe
+                </button>
+              </AlertDialog.Trigger>
+              <AlertDialog.Portal>
+                <AlertDialog.Overlay className="fixed inset-1 bg-dark/80 blur-lg" />
+                <AlertDialog.Content className="fixed left-1/2 top-1/2 max-h-[85vh] w-[90vw] max-w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-md bg-dark  p-[25px] shadow-[var(--shadow-6)] focus:outline-none border border-gold/50">
+                  <AlertDialog.Title className="m-0 text-lg font-medium text-red-500">
+                    Sei sicuro?
+                  </AlertDialog.Title>
+                  <AlertDialog.Description className="mb-5 mt-5 leading-normal">
+                    Questa azione sarà irriversibile e cancellerà tutti i dati
+                    appartenenti a questo avventuriero.
+                  </AlertDialog.Description>
+                  <div className="flex justify-end gap-2">
+                    <AlertDialog.Cancel asChild>
+                      <button className="inline-flex h-[35px] items-center justify-center rounded  px-[15px] font-medium leading-none  outline-none outline-offset-1 cursor-pointer  hover:bg-gray-700/70 border border-gray-700 focus-visible:outline-2 select-none">
+                        Annulla
+                      </button>
+                    </AlertDialog.Cancel>
+                    <AlertDialog.Action asChild>
+                      <button
+                        className="inline-flex h-[35px] items-center justify-center rounded bg-red-500/30 px-[15px] font-medium leading-none text-red11 outline-none outline-offset-1 hover:bg-red-500/50 cursor-pointer focus-visible:outline-2 focus-visible:outline-red7 select-none"
+                        onClick={handleDelete}
+                      >
+                        Conferma
+                      </button>
+                    </AlertDialog.Action>
+                  </div>
+                  {error && (
+                    <div className="text-red-500 text-sm border border-red-500/30 p-2 rounded bg-red-500/5">
+                      C'è stato un errore nella cancellazione. Riprova.
+                    </div>
+                  )}
+                </AlertDialog.Content>
+              </AlertDialog.Portal>
+            </AlertDialog.Root>
             </div>
           </div>
         </div>

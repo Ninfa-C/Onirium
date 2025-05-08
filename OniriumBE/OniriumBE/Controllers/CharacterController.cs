@@ -84,8 +84,6 @@ namespace OniriumBE.Controllers
             }
         }
 
-
-
         [Authorize]
         [HttpGet("user")]
         public async Task<IActionResult> GetUserCharacters()
@@ -111,5 +109,14 @@ namespace OniriumBE.Controllers
                 data = characters
             });
         }
+
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleCampaign(Guid id)
+        {
+            var success = await _charServices.DeleteChar(id);
+            return success ? Ok(new { message = "personaggio eliminato!" }) : BadRequest(new { message = "Errore." });
+        }
+
     }
 }

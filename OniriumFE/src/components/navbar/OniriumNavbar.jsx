@@ -23,7 +23,6 @@ const OniriumNavbar = () => {
 
   const isAdmin = profile?.role === "Admin";
 
-  console.log(profile);
   const navigation = [
     { name: "HOME", href: "/" },
     { name: "CAMPAGNA", href: "/Campaign" },

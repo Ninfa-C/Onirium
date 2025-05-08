@@ -1,6 +1,7 @@
 ﻿using OniriumBE.Data.Seeders.Core;
 using OniriumBE.Data.Seeders.DnD;
 using OniriumBE.Data.Seeders.ItemsSeeders;
+using OniriumBE.Data.Seeders.ShopSeeders;
 using OniriumBE.Data.Seeders.Spells;
 
 namespace OniriumBE.Data.Seeders
@@ -39,6 +40,11 @@ namespace OniriumBE.Data.Seeders
             //ITEM
             await SeedItemCategory.SeedAsync(context);
             await SeedItems.SeedAsync(context);
+
+            //SHOP
+            await ShopCategorySeeder.SeedAsync(context);
+            await ShopSizeSeeder.SeedAsync(context);
+            await ShopColorSeeder.SeedAsync(context);
 
 
         }

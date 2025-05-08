@@ -306,9 +306,10 @@ namespace OniriumBE.Controllers
             {
                 return BadRequest(ModelState);
             }
+            var email = User.FindFirst(ClaimTypes.Email)?.Value;
             try
             {
-                var created = await _campaignService.AddNoteAsync(dto, campaignId);
+                var created = await _campaignService.AddNoteAsync(dto, campaignId, email);
                 return created ? Ok(new { Message = "Nota aggiunta!" }) : BadRequest(new { Message = "Something went wrong!" });
             }
             catch (Exception ex)
@@ -583,7 +584,7 @@ namespace OniriumBE.Controllers
                 return NotFound();
             }
 
-            return NoContent();
+            return success ? Ok(new { message = "campagna eliminata!" }) : BadRequest(new { message = "Errore eliminando la campagna." });
         }
 
         [HttpPost("{characterId}/inventory/add")]
@@ -679,6 +680,31 @@ namespace OniriumBE.Controllers
                 return StatusCode(500, "Errore interno del server.");
             }
         }
+
+        [HttpPut("updateLife/{characterId}")]
+        public async Task<IActionResult> UpdateCharLife([FromRoute] Guid characterId, [FromBody] UpdateLifeDto dto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                var result = await _playerServices.UpdateCharLif(characterId, dto.Total, dto.Current, dto.Temporary);
+
+                if (!result)
+                {
+                    return StatusCode(500, "Errore durante l'aggiornamento del personaggio.");
+                }
+                return Ok(new { message = "updated" });
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Errore inaspettato nell'update del personaggio con id {CharacterId}", characterId);
+                return StatusCode(500, "Errore interno del server.");
+            }
+        }
+
 
         #endregion
     }

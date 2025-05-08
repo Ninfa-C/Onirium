@@ -24,5 +24,6 @@ namespace OniriumBE.Models.Campaign
         public DateTime Date { get; set; }
         public bool MasterOnly { get; set; }
         public bool IsVisible { get; set; } = false;
+        public string Createdby { get; set; }
     }
 }

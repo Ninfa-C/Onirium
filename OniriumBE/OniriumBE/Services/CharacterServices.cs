@@ -197,7 +197,7 @@ namespace OniriumBE.Services
                 if (model.Image != null)
                 {
                     var fileName = model.Image.FileName;
-                    var path = Path.Combine(Directory.GetCurrentDirectory(), "assets", "characters", fileName);
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "assets", "images", fileName);
                     await using (var stream = new FileStream(path, FileMode.Create))
                     {
                         await model.Image.CopyToAsync(stream);
@@ -216,7 +216,8 @@ namespace OniriumBE.Services
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow,
                     Image = webPath,
-                    LifePoints = model.LifePoints
+                    LifePoints = model.LifePoints,
+                    IsDeleted = false,
                 };
                 await _context.Characters.AddAsync(character);
                 await _context.SaveChangesAsync();
@@ -403,7 +404,7 @@ namespace OniriumBE.Services
                 var spellDictionary = allSpells.ToDictionary(s => s.Id);
 
                 var rawCharacters = await _context.Characters
-                    .Where(c => c.UserId == userId)
+                    .Where(c => c.UserId == userId && !c.IsDeleted)
                     .Select(c => new
                     {
                         c.Id,
@@ -620,7 +621,7 @@ namespace OniriumBE.Services
                 var classTraitDictionary = classTraits.GroupBy(t => t.Id).ToDictionary(g => g.Key, g => g.First());
 
                 var character = await _context.Characters
-                    .Where(c => c.Id == characterId)
+                    .Where(c => c.Id == characterId && !c.IsDeleted)
                     .Select(c => new
                     {
                         c.Id,
@@ -907,7 +908,18 @@ namespace OniriumBE.Services
             }
         }
 
+        public async Task<bool> DeleteChar(Guid characterId)
+        {
+            var character = await _context.Characters
+                .FirstOrDefaultAsync(c => c.Id == characterId && !c.IsDeleted);
 
+            if (character == null)
+                return false;
+
+            character.IsDeleted = true;
+            _context.Characters.Update(character);
+            return await _services.SaveAsync();
+        }
 
     }
 }

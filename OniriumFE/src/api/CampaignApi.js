@@ -154,6 +154,9 @@ export const createCharacterAssignment = (request) =>
   
   export const updateCharacterAssignment = (id, isAlive, notes) =>
     fetchApi(`Campaign/player/assign/${id}`, 'PUT', { isAlive, notes });
+
+  export const updateLifeChar = (id, form) =>
+    fetchApi(`Campaign/updateLife/${id}`, 'PUT', form);
   
   export const deleteCharacterAssignment = (id) =>
     fetchApi(`Campaign/player/assign/${id}`, 'DELETE');
@@ -194,10 +197,12 @@ export const addItemToInventory = (id, request) => {
     return fetchApi(`Campaign/${id}/spells/remove`, 'DELETE', request);
   };
 
+
   export const updateCharacterCampaign = (id, formData) =>
     fetchApiWithFile(`Campaign/update/${id}`, 'PUT', formData);
 
 
+  //PROFILE
   export const UpdateProfilePic = (data) =>
     fetchApiWithFile("account/update-profile-picture", "PUT", data)
 
@@ -215,3 +220,7 @@ export const addItemToInventory = (id, request) => {
   
   export const DeleteProfile = (data) =>
     fetchApi("account/delete-profile" , "DELETE", data)
+
+  //CHARACTER
+  export const deleteCharacter = (id) => 
+    fetchApi(`Character/${id}`, 'DELETE');

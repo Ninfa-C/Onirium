@@ -104,7 +104,8 @@ const NewNote = ({ isOpen, onClose, refreshNotes, campaign }) => {
                         isVisible: e.target.checked ? false : prev.isVisible,
                       }))
                     }
-                  />
+                  /></>
+              )}
                   <CustomCheckbox
                     id="isVisible"
                     label="Visibile ai giocatori"
@@ -117,8 +118,7 @@ const NewNote = ({ isOpen, onClose, refreshNotes, campaign }) => {
                       }))
                     }
                   />
-                </>
-              )}
+                
             </div>
           </div>
           <div className="flex justify-end gap-3 mt-6">
