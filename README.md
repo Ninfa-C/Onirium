@@ -25,12 +25,8 @@ L'obiettivo principale è creare una community attiva dove gli utenti possano co
 - Sistema di multiclasse e avanzamento di livello
 
 <div>
-<img src="docs/17.png" height="400" />
 <img src="docs/15.png" height="400" />
 <img src="docs/16.png"  height="400" />
-<img src="docs/17.png" height="400"  />
-<img src="docs/18.png"  height="400" />
-<img src="docs/19.png" height="400"  />
 <img src="docs/3.png"  height="400" />
 <img src="docs/20.png" height="400"  />
 </div>
@@ -41,16 +37,11 @@ L'obiettivo principale è creare una community attiva dove gli utenti possano co
 - Gestione degli incontri e dei tesori.
 <div>
 <img src="docs/5.png" height="400"  />
-<img src="docs/4.png" height="400"  />
-<img src="docs/6.png" height="400"  />
-<img src="docs/7.png" height="400"  />
-<img src="docs/8.png" height="400"  />
+<img src="docs/6.png" height="300"  />
+<img src="docs/7.png" height="300"  />
+<img src="docs/8.png" height="300"  />
 <img src="docs/9.png" height="400"  />
-<img src="docs/10.png" height="400"  />
-<img src="docs/11.png" height="400"  />
 <img src="docs/12.png" height="400"  />
-<img src="docs/13.png" height="400"  />
-<img src="docs/14.png" height="400"  />
 </div>
 
 
