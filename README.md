@@ -12,10 +12,10 @@
 **Onirium** è un'applicazione web dedicata ai giocatori di Dungeons & Dragons, progettata per semplificare la creazione e gestione dei personaggi, della campagna e favorire la condivisione di risorse tra i giocatori.
 
 L'obiettivo principale è creare una community attiva dove gli utenti possano condividere personaggi, oggetti magici, incantesimi e homebrew, arricchendo l'esperienza di gioco con materiale creativo e ispirazione per campagne personalizzate.
-
-<img src="docs/1.png" height="400" />
-<img src="docs/2.png" height="400" />
-
+<div>
+<img src="docs/1.png" height="200" />
+<img src="docs/1.png" height="200" />
+</div>
 
 ## ✨ Caratteristiche Principali
 
@@ -39,9 +39,9 @@ L'obiettivo principale è creare una community attiva dove gli utenti possano co
 - Strumenti per DM: tracciamento sessioni, gestione luoghi e missioni.
 - Sistema di note condivise tra i giocatori
 - Gestione degli incontri e dei tesori.
-
-<img src="docs/4.png" height="400"  />
+<div>
 <img src="docs/5.png" height="400"  />
+<img src="docs/4.png" height="400"  />
 <img src="docs/6.png" height="400"  />
 <img src="docs/7.png" height="400"  />
 <img src="docs/8.png" height="400"  />
@@ -51,7 +51,7 @@ L'obiettivo principale è creare una community attiva dove gli utenti possano co
 <img src="docs/12.png" height="400"  />
 <img src="docs/13.png" height="400"  />
 <img src="docs/14.png" height="400"  />
-
+</div>
 
 
 ### 🛒 Shop e Community (in sviluppo)
