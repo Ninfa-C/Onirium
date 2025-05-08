@@ -13,8 +13,8 @@
 
 L'obiettivo principale è creare una community attiva dove gli utenti possano condividere personaggi, oggetti magici, incantesimi e homebrew, arricchendo l'esperienza di gioco con materiale creativo e ispirazione per campagne personalizzate.
 
-<img src="docs/1.png" alt="Onirium Logo" width="600" />
-<img src="docs/2.png" alt="Onirium Logo" width="186" />
+<img src="docs/1.png" height="200" />
+<img src="docs/2.png" height="200" />
 
 
 ## ✨ Caratteristiche Principali
@@ -24,27 +24,15 @@ L'obiettivo principale è creare una community attiva dove gli utenti possano co
 - Strumenti per personalizzazione avanzata (razze, classi, background, talenti)
 - Sistema di multiclasse e avanzamento di livello
 
-<style>
-    .image-grid {
-        display: flex;
-        flex-wrap: wrap;
-    }
-    .image-grid img {
-        height: 200px;
-        width: auto;
-        margin: 10px;
-    }
-</style>
-
-<div class="image-grid">
-<img src="docs/17.png" />
-<img src="docs/15.png" />
-<img src="docs/16.png"  />
-<img src="docs/17.png"  />
-<img src="docs/18.png"  />
-<img src="docs/19.png"  />
-<img src="docs/3.png"  />
-<img src="docs/20.png"  />
+<div>
+<img src="docs/17.png" height="200" />
+<img src="docs/15.png" height="200" />
+<img src="docs/16.png"  height="200" />
+<img src="docs/17.png" height="200"  />
+<img src="docs/18.png"  height="200" />
+<img src="docs/19.png" height="200"  />
+<img src="docs/3.png"  height="200" />
+<img src="docs/20.png" height="200"  />
 </div>
 
 ### 🏰 Gestione Campagne
@@ -52,19 +40,18 @@ L'obiettivo principale è creare una community attiva dove gli utenti possano co
 - Sistema di note condivise tra i giocatori
 - Gestione degli incontri e dei tesori.
 
-<div class="image-grid">
-<img src="docs/4.png" />
-<img src="docs/5.png" />
-<img src="docs/6.png"  />
-<img src="docs/7.png"  />
-<img src="docs/8.png"  />
-<img src="docs/9.png"  />
-<img src="docs/10.png"  />
-<img src="docs/11.png"  />
-<img src="docs/12.png"  />
-<img src="docs/13.png"  />
-<img src="docs/14.png"  />
-</div>
+<img src="docs/4.png"height="200"  />
+<img src="docs/5.png"height="200"  />
+<img src="docs/6.png" height="200"  />
+<img src="docs/7.png" height="200"  />
+<img src="docs/8.png" height="200"  />
+<img src="docs/9.png" height="200"  />
+<img src="docs/10.png" height="200"  />
+<img src="docs/11.png" height="200"  />
+<img src="docs/12.png" height="200"  />
+<img src="docs/13.png" height="200"  />
+<img src="docs/14.png" height="200"  />
+
 
 
 ### 🛒 Shop e Community (in sviluppo)
