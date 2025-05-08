@@ -9,7 +9,7 @@ namespace OniriumBE.Data.Seeders.ItemsSeeders
     {
         public static async Task SeedAsync(ApplicationDbContext context)
         {
-            if (await context.Items.AnyAsync()) return;
+            //if (await context.Items.AnyAsync()) return;
 
             var stats = await GetStats(context);
             var cat = await GetCategory(context);
@@ -215,7 +215,31 @@ CreateGenericItem("Zaino", "", 2.5m, 200, cat["Oggetti da Utilizzo"], false),
                 {
                     CreateEffect("Difesa", "+1 alla CA.", 1, null),
                     CreateEffect("Tiri Salvezza", "+1 ai tiri salvezza.", 1,null)
-                })
+                }),
+                CreateMagicalItem("Ali del Volo", "Mentre indossi questa cappa, puoi usare un'azione per pronunciare la sua parola di comando, trasformandola in un paio di ali da pipistrello o da uccello che spuntano dalla tua schiena per 1 ora o finché non ripeti la parola di comando con un'azione.", 0.5m, 1000, cat["Oggetto Magico"], true, "Raro", true, new List<ItemEffect>
+                {
+                    CreateEffect("Volo", "Le ali ti forniscono velocità di volo 18 metri. Quando scompaiono, non potrai più usarle per 1d12 ore.", 0, null)
+                }),
+    CreateMagicalItem("Armatura Adamantina", "Mentre la indossi, qualsiasi colpo critico che subisci diventa un colpo normale.", 20m, 500, cat["Oggetto Magico"], false, "Non comune", true, new List<ItemEffect>()),
+    CreateMagicalItem("Lama della Fortuna", "Se hai addosso la spada, puoi affidarti alla sua fortuna per ripetere un tiro per colpire, prova di caratteristica o tiro salvezza. Mentre la impugni, puoi usare un 'azione per spendere 1 carica e lanciare tramite essa l'incantesimo desiderio.", 1.5m, 6000, cat["Oggetto Magico"], false, "Leggendario", true, new List<ItemEffect>
+                {
+                    CreateEffect("Attacco", "+1 ai tiri per colpire e danno.", 1, null),
+                    CreateEffect("Tiri Salvezza", "+1 ai tiri salvezza.", 1, null)
+
+                }),
+    CreateMagicalItem("Bacchetta della Metamorfosi", "Mentre impugni questa bacchetta, puoi usare un'azione per spendere 1 carica per lanciare tramite essa l'incantesimo metamorfosi (CD del tiro salvezza 15). Questa bacchetta ha 7 cariche. La bacchetta recupera 1d6 + 1 cariche spese all'alba di ciascun giorno.", 0.1m, 3000, cat["Oggetto Magico"], true, "Molto Raro", true, new List<ItemEffect>()),
+    CreateMagicalItem("Scudo Animato", "Mentre impugni questo scudo, con un'azione bonus puoi pronunciare una parola di comando e farlo animare. Lo scudo fluttuerà nell'aria all'interno del tuo spazio per proteggerti come se lo stessi impugnando, lasciandoti libera la mano.", 2m, 1000, cat["Oggetto Magico"], true, "Molto Raro", true, new List<ItemEffect>()),
+    CreateMagicalItem("Ammazzagiganti", "Quando colpisci un gigante con quest'arma, il gigante subisce 2d6 danni aggiuntivi del tipo dell'arma e deve superare un tiro salvezza di Forza con CD 15 o cadere prono. Ai fini di quest'arma, gigante è qualsiasi creatura del tipo gigante.", 3.7m, 3000, cat["Oggetto Magico"], false, "Raro", true, new List<ItemEffect>
+                {
+                    CreateEffect("Attacco", "+1 ai tiri per colpire e danno.", 1, null),
+                }),
+    CreateMagicalItem("Anello dei Tre Desideri", "Mentre indossi quest'anello, puoi usare un'azione per spendere 1 delle sue 3 cariche per lanciare tramite esso l'incantesimo desiderio. L'anello perde la sua magia quando usi l'ultima carica.", 0.05m, 5000, cat["Oggetto Magico"], false, "Leggendario", true, new List<ItemEffect>()),
+    CreateMagicalItem("Amuleto della Salute", "Mentre indossi questo amuleto la tua Costituzione è 19. L'amuleto non ha effetto se la tua Costituzione è già 19 o più alta.", 0.05m, 3000, cat["Oggetto Magico"], false, "Raro", true, new List<ItemEffect>()),
+    CreateMagicalItem("Campana dell'Apertura", "La campana emette un suono limpido, e una serratura o laccio dell'oggetto si apre a meno che il suono sia impedito dal raggiungere l'oggetto. Se non rimangono serrature o lacci da aprire, l'oggetto si apre da sé.", 1m, 1200, cat["Oggetto Magico"], false, "Raro", true, new List<ItemEffect>()),
+    CreateMagicalItem("Spada Vorpal", "Quando attacchi una creatura che abbia almeno una testa con quest'arma e ottieni 20 al tiro per colpire, tagli una delle teste della creatura. La creatura muore se non può sopravvivere senza la perdita della testa. ", 1.5m, 5300, cat["Oggetto Magico"], true, "Leggendario", true, new List<ItemEffect>
+                {
+                    CreateEffect("Attacco", "+3 ai tiri per colpire e danno.", 3, null),
+                }),
             };
 
             if (await context.Items.CountAsync() >= model.Count)

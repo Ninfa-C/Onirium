@@ -1,10 +1,11 @@
 # 🐉 Onirium
 
 <p align="center">
-  <img src="/logo.png" alt="Onirium Logo" width="200" />
+  <img src="docs/logo.png" alt="Onirium Logo" width="200" />
   <br>
   <em>La tua avventura inizia qui</em>
 </p>
+
 
 ## 📜 Panoramica
 
@@ -12,19 +13,59 @@
 
 L'obiettivo principale è creare una community attiva dove gli utenti possano condividere personaggi, oggetti magici, incantesimi e homebrew, arricchendo l'esperienza di gioco con materiale creativo e ispirazione per campagne personalizzate.
 
+<img src="docs/1.png" alt="Onirium Logo" width="600" />
+<img src="docs/2.png" alt="Onirium Logo" width="186" />
+
+
 ## ✨ Caratteristiche Principali
 
 ### 🧙‍♂️ Creazione e Gestione del Personaggio
 - Scheda personaggio altamente personalizzata che esula da molte regole dei manuali ufficiali
 - Strumenti per personalizzazione avanzata (razze, classi, background, talenti)
 - Sistema di multiclasse e avanzamento di livello
-- Condivisione con la community
+
+<style>
+    .image-grid {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .image-grid img {
+        height: 200px;
+        width: auto;
+        margin: 10px;
+    }
+</style>
+
+<div class="image-grid">
+<img src="docs/17.png" />
+<img src="docs/15.png" />
+<img src="docs/16.png"  />
+<img src="docs/17.png"  />
+<img src="docs/18.png"  />
+<img src="docs/19.png"  />
+<img src="docs/3.png"  />
+<img src="docs/20.png"  />
+</div>
 
 ### 🏰 Gestione Campagne
-- Strumenti per DM: tracciamento sessioni, gestione NPC e tesori
-- Mappe interattive e note di campagna
+- Strumenti per DM: tracciamento sessioni, gestione luoghi e missioni.
 - Sistema di note condivise tra i giocatori
-- Gestione degli incontri e dei tesori
+- Gestione degli incontri e dei tesori.
+
+<div class="image-grid">
+<img src="docs/4.png" />
+<img src="docs/5.png" />
+<img src="docs/6.png"  />
+<img src="docs/7.png"  />
+<img src="docs/8.png"  />
+<img src="docs/9.png"  />
+<img src="docs/10.png"  />
+<img src="docs/11.png"  />
+<img src="docs/12.png"  />
+<img src="docs/13.png"  />
+<img src="docs/14.png"  />
+</div>
+
 
 ### 🛒 Shop e Community (in sviluppo)
 - Marketplace per contenuti premium
@@ -49,19 +90,53 @@ L'obiettivo principale è creare una community attiva dove gli utenti possano co
 
 ## 🚀 Installazione
 
-\`\`\`bash
-# Clona il repository
+## Backend
+
+### Apri il file OniriumBE.sln
+Strumenti > Gestione pacchetti NuGet > Console di gestione pacchetti > 
+```bash
+dotnet restore
+```
+
+### Configurazione stringa di connessione
+
+Apri il file appsettings.json e configura la striga:
+```bash
+  "ConnectionStrings": {
+  "DefaultConnection": "Server=NOME_DEL_TUO_PC;User Id=TUO_USERNAME_SQL;Password=LA_TUA_PASSWORD_SQL;"
+}
+```
+
+### Crea la migrazione e aggiorna il database
+
+ Console di gestione pacchetti > 
+ 
+ ```bash
+Add-Migration Initial 
+Update-Database
+```
+
+## Frontend
+
+
+### Clona il repository
+```bash
 git clone https://github.com/Ninfa-C/Onirium.git
+```
+### Naviga nella directory del progetto
+```bash
+cd OniriumFE
+```
 
-# Naviga nella directory del progetto
-cd Onirium
-
-# Installa le dipendenze
+### Installa le dipendenze
+```bash
 npm install
+```
 
-# Avvia l'applicazione in modalità sviluppo
+### Avvia l'applicazione in modalità sviluppo
+```bash
 npm run dev
-\`\`\`
+```
 
 ## 🗺️ Roadmap e Sviluppi Futuri
 
@@ -69,18 +144,16 @@ npm run dev
 - ✅ Generatore di personaggi
 - ✅ Sistema di account e salvataggio
 
-### Fase 2 (In corso)
-- ⏳ Strumenti per la gestione delle campagne
-- ⏳ Sistema di note condivise
-- ⏳ Mappe interattive
+### Fase 2 (completata)
+- ✅ Strumenti per la gestione delle campagne
+- ✅ Sistema di note condivise
 
 ### Fase 3 (Pianificata)
 - 📅 Integrazione e-commerce
 - 📅 Sezione community con profili utente
 - 📅 Sistema di abbonamento per contenuti premium
-- 📅 App mobile
 
-## 👥 Contribuzione
+## 👥 Contributi
 
 Siamo aperti a contributi! Se desideri partecipare allo sviluppo di Onirium:
 
@@ -89,10 +162,6 @@ Siamo aperti a contributi! Se desideri partecipare allo sviluppo di Onirium:
 3. Committa le tue modifiche (`git commit -m 'Add some AmazingFeature'`)
 4. Pusha al branch (`git push origin feature/AmazingFeature`)
 5. Apri una Pull Request
-
-## 📄 Licenza
-
-Distribuito sotto la licenza MIT. Vedi `LICENSE` per maggiori informazioni.
 
 ## 📞 Contatti
 
@@ -105,3 +174,6 @@ Email: ninfa_95@hotmail.it
 <p align="center">
   Fatto con ❤️ per la community di D&D
 </p>
+
+
+Alcune icone Provenienti da: <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/intrinsical/tw-dnd/tree/main/icons">Intrinsical's D&D 5e Icon Set</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/intrinsical">David Kor Kian Wei</a> is licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">Creative Commons Attribution-ShareAlike 4.0 International <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1" alt=""></a></p>
