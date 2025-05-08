@@ -140,6 +140,10 @@ Siamo aperti a contributi! Se desideri partecipare allo sviluppo di Onirium:
 4. Pusha al branch (`git push origin feature/AmazingFeature`)
 5. Apri una Pull Request
 
+## 📄 Licenza
+
+Questo progetto è attualmente a scopo didattico/sperimentale. La licenza verrà specificata in futuro.
+
 ## 📞 Contatti
 
 Nome del Progetto: [Onirium]
