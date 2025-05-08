@@ -38,7 +38,7 @@
 
 
 # Migrations
-**/*/Migrations/
+**/OniriumBE/Migrations/
 
 # Public/generated assets
 **/public/assets/
