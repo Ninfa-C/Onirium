@@ -13,8 +13,8 @@
 
 L'obiettivo principale è creare una community attiva dove gli utenti possano condividere personaggi, oggetti magici, incantesimi e homebrew, arricchendo l'esperienza di gioco con materiale creativo e ispirazione per campagne personalizzate.
 <div>
-<img src="docs/1.png" height="200" />
-<img src="docs/2.png" height="200" />
+<img src="docs/1.png" height="300" />
+<img src="docs/2.png" height="300" />
 </div>
 
 ## ✨ Caratteristiche Principali
@@ -27,7 +27,6 @@ L'obiettivo principale è creare una community attiva dove gli utenti possano co
 <div>
 <img src="docs/15.png" height="400" />
 <img src="docs/16.png"  height="400" />
-<img src="docs/3.png"  height="400" />
 <img src="docs/20.png" height="400"  />
 </div>
 
@@ -40,8 +39,8 @@ L'obiettivo principale è creare una community attiva dove gli utenti possano co
 <img src="docs/6.png" height="300"  />
 <img src="docs/7.png" height="300"  />
 <img src="docs/8.png" height="300"  />
-<img src="docs/9.png" height="400"  />
-<img src="docs/12.png" height="400"  />
+<img src="docs/9.png" height="300"  />
+<img src="docs/12.png" height="300"  />
 </div>
 
 
