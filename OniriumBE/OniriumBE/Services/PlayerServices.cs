@@ -156,23 +156,28 @@ namespace OniriumBE.Services
                 string webPath = character.Image;
                 if (model.Image != null)
                 {
-                    if (!string.IsNullOrEmpty(character.Image))
+                    if (!string.IsNullOrEmpty(webPath))
                     {
-                        var oldImagePath = Path.Combine(Directory.GetCurrentDirectory(), character.Image.TrimStart('/'));
-                        if (File.Exists(oldImagePath))
+                        int usageCount = await _context.Locations
+                            .CountAsync(l => l.Image == webPath);
+
+                        if (usageCount <= 1)
                         {
-                            File.Delete(oldImagePath);
+                            var oldImagePath = Path.Combine(Directory.GetCurrentDirectory(), webPath.TrimStart('/'));
+                            if (File.Exists(oldImagePath))
+                            {
+                                File.Delete(oldImagePath);
+                            }
                         }
                     }
-
-                    var fileName = model.Image.FileName;
+                    var fileName = $"{Guid.NewGuid()}_{model.Image.FileName}";
                     var path = Path.Combine(Directory.GetCurrentDirectory(), "assets", "images", fileName);
 
                     await using (var stream = new FileStream(path, FileMode.Create))
                     {
                         await model.Image.CopyToAsync(stream);
                     }
-                    webPath = "assets/images/" + fileName;
+                    webPath = "assets/quest/" + fileName;
                 }
 
                 character.Name = model.Name;

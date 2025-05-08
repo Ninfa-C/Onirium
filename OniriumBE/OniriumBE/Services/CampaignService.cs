@@ -33,13 +33,14 @@ namespace OniriumBE.Services
                 string webPath = null;
                 if (model.Image != null)
                 {
-                    var fileName = model.Image.FileName;
-                    var path = Path.Combine(Directory.GetCurrentDirectory(), "assets", "images", fileName);
+                    var fileName = $"{Guid.NewGuid()}_{model.Image.FileName}";
+
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "assets", "campaign", fileName);
                     await using (var stream = new FileStream(path, FileMode.Create))
                     {
                         await model.Image.CopyToAsync(stream);
                     }
-                    webPath = Path.Combine("assets", "images", fileName);
+                    webPath = Path.Combine("assets", "campaign", fileName);
                 }
                 var newCampaign = new Campaign
                 {
@@ -173,7 +174,7 @@ namespace OniriumBE.Services
             return await _services.SaveAsync();
         }
 
-        public async Task<bool> Update(Guid campaignId, UpdateCampaign model)
+        public async Task<bool> Update(Guid campaignId, UpdateCampaign dto)
         {
             var campaign = await _context.Campaigns
                 .FirstOrDefaultAsync(c => c.Id == campaignId && !c.IsDeleted);
@@ -182,21 +183,36 @@ namespace OniriumBE.Services
                 return false;
 
             string webPath = campaign.Img;
-            if (model.Image != null)
-            { 
-                var fileName = model.Image.FileName;
-                var path = Path.Combine(Directory.GetCurrentDirectory(), "assets", "images", fileName);
+            if (dto.Image != null)
+            {
+                if (!string.IsNullOrEmpty(webPath))
+                {
+                    int usageCount = await _context.Locations
+                        .CountAsync(l => l.Image == webPath);
+
+                    if (usageCount <= 1)
+                    {
+                        var oldImagePath = Path.Combine(Directory.GetCurrentDirectory(), webPath.TrimStart('/'));
+                        if (File.Exists(oldImagePath))
+                        {
+                            File.Delete(oldImagePath);
+                        }
+                    }
+                }
+                var fileName = $"{Guid.NewGuid()}_{dto.Image.FileName}";
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "assets", "campaign", fileName);
 
                 await using (var stream = new FileStream(path, FileMode.Create))
                 {
-                    await model.Image.CopyToAsync(stream);
+                    await dto.Image.CopyToAsync(stream);
                 }
-                webPath = "assets/images/" + fileName;
+                webPath = "assets/campaign/" + fileName;
             }
 
+
             campaign.Img = webPath;
-            campaign.Name = model.Name;
-            campaign.Description = model.Description;
+            campaign.Name = dto.Name;
+            campaign.Description = dto.Description;
 
             return await _services.SaveAsync();
         }
@@ -344,7 +360,7 @@ namespace OniriumBE.Services
                 if (dto.Image != null)
                 {
                     var fileName = dto.Image.FileName;
-                    var path = Path.Combine(Directory.GetCurrentDirectory(), "assets", "images", fileName);
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "assets", "locations", fileName);
                     await using (var stream = new FileStream(path, FileMode.Create))
                     {
                         await dto.Image.CopyToAsync(stream);
@@ -420,23 +436,28 @@ namespace OniriumBE.Services
                 string webPath = location.Image;
                 if (dto.Image != null)
                 {
-                    if (!string.IsNullOrEmpty(location.Image))
+                    if (!string.IsNullOrEmpty(webPath))
                     {
-                        var oldImagePath = Path.Combine(Directory.GetCurrentDirectory(), location.Image.TrimStart('/'));
-                        if (File.Exists(oldImagePath))
+                        int usageCount = await _context.Locations
+                            .CountAsync(l => l.Image == webPath);
+
+                        if (usageCount <= 1)
                         {
-                            File.Delete(oldImagePath);
+                            var oldImagePath = Path.Combine(Directory.GetCurrentDirectory(), webPath.TrimStart('/'));
+                            if (File.Exists(oldImagePath))
+                            {
+                                File.Delete(oldImagePath);
+                            }
                         }
                     }
-
-                    var fileName = dto.Image.FileName;
-                    var path = Path.Combine(Directory.GetCurrentDirectory(), "assets", "images", fileName);
+                    var fileName = $"{Guid.NewGuid()}_{dto.Image.FileName}";
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "assets", "locations", fileName);
 
                     await using (var stream = new FileStream(path, FileMode.Create))
                     {
                         await dto.Image.CopyToAsync(stream);
                     }
-                    webPath = "assets/images/" + fileName;
+                    webPath = "assets/locations/" + fileName;
                 }
 
                 location.Name = dto.Name;
@@ -633,13 +654,13 @@ namespace OniriumBE.Services
                 string webPath = null;
                 if (dto.Image != null)
                 {
-                    var fileName = dto.Image.FileName;
-                    var path = Path.Combine(Directory.GetCurrentDirectory(), "assets", "images", fileName);
+                    var fileName = $"{Guid.NewGuid()}_{dto.Image.FileName}";
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "assets", "quest", fileName);
                     await using (var stream = new FileStream(path, FileMode.Create))
                     {
                         await dto.Image.CopyToAsync(stream);
                     }
-                    webPath = Path.Combine("assets", "images", fileName);
+                    webPath = Path.Combine("assets", "quest", fileName);
                 }
                 var note = new CampaignNote
                 {
@@ -704,23 +725,28 @@ namespace OniriumBE.Services
             string webPath = note.Image;
             if (dto.Image != null)
             {
-                if (!string.IsNullOrEmpty(note.Image))
+                if (!string.IsNullOrEmpty(webPath))
                 {
-                    var oldImagePath = Path.Combine(Directory.GetCurrentDirectory(), note.Image.TrimStart('/'));
-                    if (File.Exists(oldImagePath))
+                    int usageCount = await _context.Locations
+                        .CountAsync(l => l.Image == webPath);
+
+                    if (usageCount <= 1)
                     {
-                        File.Delete(oldImagePath);
+                        var oldImagePath = Path.Combine(Directory.GetCurrentDirectory(), webPath.TrimStart('/'));
+                        if (File.Exists(oldImagePath))
+                        {
+                            File.Delete(oldImagePath);
+                        }
                     }
                 }
-
-                var fileName = dto.Image.FileName;
-                var path = Path.Combine(Directory.GetCurrentDirectory(), "assets", "images", fileName);
+                var fileName = $"{Guid.NewGuid()}_{dto.Image.FileName}";
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "assets", "quest", fileName);
 
                 await using (var stream = new FileStream(path, FileMode.Create))
                 {
                     await dto.Image.CopyToAsync(stream);
                 }
-                webPath = "assets/images/" + fileName;
+                webPath = "assets/quest/" + fileName;
             }
 
             note.Image = webPath;

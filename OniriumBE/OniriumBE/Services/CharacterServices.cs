@@ -197,7 +197,7 @@ namespace OniriumBE.Services
                 if (model.Image != null)
                 {
                     var fileName = model.Image.FileName;
-                    var path = Path.Combine(Directory.GetCurrentDirectory(), "assets", "images", fileName);
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "assets", "characters", fileName);
                     await using (var stream = new FileStream(path, FileMode.Create))
                     {
                         await model.Image.CopyToAsync(stream);

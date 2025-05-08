@@ -63,5 +63,6 @@ namespace OniriumBE.Models.Char
         public DateTime UpdatedAt { get; set; }
         public ICollection<StartingBoost>? StartingBoost { get; set; }
         public ICollection<CharacterTrait>? Traits { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

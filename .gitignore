@@ -30,10 +30,15 @@
 *.sln
 *.sw?
 
+
 # Package manager lock files
 **/package-lock.json
 **/yarn.lock
 **/pnpm-lock.yaml
+
+
+# Migrations
+**/*/Migrations/
 
 # Public/generated assets
 **/public/assets/
