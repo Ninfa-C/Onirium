@@ -7,7 +7,6 @@ import { getUserFromToken } from "../../api/AccountApi";
 const NewPlayer = ({ isOpen, onClose, campaign }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredUsers, setFilteredUsers] = useState([]);
-  const [inviteRequest, setInviteRequest] = useState();
 
    const handleSearch = async (e) => {
     const value = e.target.value;
@@ -22,18 +21,19 @@ const NewPlayer = ({ isOpen, onClose, campaign }) => {
   const inviterName = getUserFromToken();
 
   const handleAdd = (user) => {
-    setInviteRequest({
+    const payload = {
       campaignId: campaign.id,
       campaignName: campaign.name,
-      InviterName : inviterName,
+      InviterName: inviterName,
       users: [{ email: user.email, name: user.username }],
-    });
-    console.log(inviteRequest)
-    try {        
-        sendPlayerInvite(inviteRequest);        
-      } catch (error) {
-        console.error("Errore nel recupero utenti:", error.message);
-      }
+    };
+  
+    try {
+      sendPlayerInvite(payload);
+    } catch (error) {
+      console.error("Errore nel recupero utenti:", error.message);
+    }
+  
     onClose();
   };
 

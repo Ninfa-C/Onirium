@@ -131,13 +131,13 @@ const CharacterDetails = () => {
               </div>
             </div>
             <div className="flex gap-2">
-              <button
+              {/* <button
                 type="button"
                 variant="outline"
                 className="border-gold/30 text-gold hover:bg-gold/10 hover:text-gold flex items-center hover:cursor-pointer border px-2 py-1 bg-dark"
               >
                 <Pencil className="mr-2 h-4 w-4" /> Modifica
-              </button>
+              </button> */}
               {/* <button
                 type="button"
                 className="bg-gold/20 hover:bg-gold/30 text-gold border border-gold/30  flex items-center hover:cursor-pointer px-2 py-1"
@@ -280,7 +280,7 @@ const CharacterDetails = () => {
                   </div>
                 </div>
               </CardContent>
-              <CardFooter className="grid grid-cols-2 gap-2 p-6 ">
+              {/* <CardFooter className="grid grid-cols-2 gap-2 p-6 ">
                 <button
                   type="button"
                   className="border-gold/30 text-gold hover:bg-gold/10 hover:text-gold flex items-center hover:cursor-pointer border px-2 py-1 rounded-sm bg-dark justify-center"
@@ -293,7 +293,7 @@ const CharacterDetails = () => {
                 >
                   <Bookmark className="mr-2 h-4 w-4" /> Salva
                 </button>
-              </CardFooter>
+              </CardFooter> */}
             </Card>
           </div>
           {/* tabs */}

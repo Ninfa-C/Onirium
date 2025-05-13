@@ -29,6 +29,15 @@ const CharSkills = () => {
   const charStats = useSelector((state) => state.selection.stats);
   const dataStats = useSelector((state) => state.data.stat);
 
+  const totalPoints = charStats.reduce((acc, item) => {
+    const value = item.value;
+    const cost =
+      value <= 13
+        ? value - 8
+        : (13 - 8) + (value - 13) * 2;
+    return acc + cost;
+  }, 0);
+
   return (
     <TabsContent value="attributes" className="mt-0 container-fluid ">
       <CharHeader
@@ -128,7 +137,15 @@ const CharSkills = () => {
                 );
               })}
           </tbody>
+          <p
+  className={`mt-4 text-sm tracking-wider text-gold ${
+    totalPoints > 27 ? "text-red-500" : ""
+  }`}
+>
+  Punti spesi: {totalPoints}/27
+</p>
         </table>
+        
         <div>
           <StartingBoostSelector />
           <HitPoints />

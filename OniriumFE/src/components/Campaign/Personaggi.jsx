@@ -80,7 +80,7 @@ const Personaggi = ({ campaign }) => {
                           </div>
                         </div>
                         <div className="flex-1 mt-2 md:mt-0">
-                          {campaign.role === "master" && (
+                          {/* {campaign.role === "master" && (
                             <div className="bg-black/30 p-3 rounded-md border border-gold/10">
                               <h4 className="text-sm text-gold mb-1">
                                 Note del Master:
@@ -104,7 +104,7 @@ const Personaggi = ({ campaign }) => {
                                 </Button>
                               </div>
                             </div>
-                          )}
+                          )} */}
                         </div>
                       </div>
                     </CardContent>

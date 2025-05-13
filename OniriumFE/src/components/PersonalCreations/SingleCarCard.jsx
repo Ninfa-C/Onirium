@@ -65,9 +65,9 @@ const SingleCarCard = ({ char }) => {
             <Link to={`/Creation/Character/${char.id}`}  className="border-gold/30 text-gold hover:bg-gold/10 hover:text-gold flex items-center border py-1 rounded-sm justify-center bg-dark"> 
             <Eye className="mr-2 h-4 w-4" /> Visualizza
             </Link>
-            <Link to="/" className="bg-gold/20 hover:bg-gold/30 text-gold border-gold/30 flex items-center border py-1 rounded-sm justify-center"> 
+            {/* <Link to="/" className="bg-gold/20 hover:bg-gold/30 text-gold border-gold/30 flex items-center border py-1 rounded-sm justify-center"> 
             <Share className="mr-2 h-4 w-4" /> Condividi
-            </Link>
+            </Link> */}
           </CardFooter>
 
       </CardContent>

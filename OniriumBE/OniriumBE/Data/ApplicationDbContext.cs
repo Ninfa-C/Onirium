@@ -78,6 +78,7 @@ namespace OniriumBE.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<ColorImage> ColorImages { get; set; }
         //MODS
         public DbSet<Mod> Mods { get; set; }
         public DbSet<ModContent> ModContents { get; set; }
