@@ -3,6 +3,7 @@ using OniriumBE.Data;
 using OniriumBE.DTOs.Campaign;
 using OniriumBE.DTOs.Character;
 using OniriumBE.DTOs.Class;
+using OniriumBE.Models.Campaign;
 using OniriumBE.Models.Campaign.CampaignChar;
 using OniriumBE.Models.Char.Classes;
 using Serilog;
@@ -49,9 +50,6 @@ namespace OniriumBE.Services
             await _context.SaveChangesAsync();
             return true;
         }
-
-
-
 
         public async Task<bool> AddSpellToCharacterAsync(Guid characterId, Guid spellId, bool isPrepared)
         {
@@ -349,6 +347,21 @@ namespace OniriumBE.Services
             }
         }
 
+
+        public async Task<bool> RemovePlayerAsync(int assingment)
+        {
+            var player = _context.PlayerCampaign
+                 .FirstOrDefault(p => p.Id == assingment);
+
+            if (player == null)
+            {
+                throw new Exception("player not found.");
+            }
+
+            _context.PlayerCampaign.Remove(player);
+
+            return await _services.SaveAsync();
+        }
 
     }
 }

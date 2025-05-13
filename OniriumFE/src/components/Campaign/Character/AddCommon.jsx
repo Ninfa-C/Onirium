@@ -11,9 +11,7 @@ const AddCommon = ({ data, setData }) => {
   const [search, setSearch] = useState("");
   const dataItems = useSelector((state) => state.data.item.oggettivari);
   const dispatch = useDispatch();
-  const inventory = useSelector(
-    (state) => state.characterDetails.characterAssign.character.inventory
-  );
+  const inventory = useSelector((state) => state.characterDetails.commonItems);
 
   const isItemSelected = (id) =>
     data.some((item) => item.ItemId === id) ||

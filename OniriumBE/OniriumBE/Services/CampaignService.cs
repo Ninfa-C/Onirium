@@ -940,9 +940,7 @@ namespace OniriumBE.Services
             if (assignment == null) return false;
 
             _context.CharacterPlayerAssignments.Remove(assignment);
-            await _context.SaveChangesAsync();
-
-            return true;
+            return await _services.SaveAsync();
         }
 
 

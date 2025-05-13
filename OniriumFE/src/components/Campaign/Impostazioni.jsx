@@ -6,6 +6,7 @@ import {
   People,
   Plus,
   Save,
+  XLg,
 } from "react-bootstrap-icons";
 import { Card, CardContent, CardHeader, CardTitle } from "../Generic/Cards";
 import { Switch } from "radix-ui";
@@ -15,7 +16,11 @@ import { Button } from "../Generic/ButtonCustom";
 import { useState } from "react";
 import NewPlayer from "./NewPlayer";
 import { AlertDialog } from "radix-ui";
-import { deleCampaign, updateCampaign } from "../../api/CampaignApi";
+import {
+  deleCampaign,
+  deletePlayer,
+  updateCampaign,
+} from "../../api/CampaignApi";
 import { useNavigate } from "react-router-dom";
 import { InputForm } from "../Generic/Form";
 
@@ -37,7 +42,7 @@ const Impostazioni = ({
     description: campaign.description,
   });
   const navigateTo = useNavigate();
-  
+
   const handleDelete = async (e) => {
     setError(false);
     e.preventDefault();
@@ -74,6 +79,15 @@ const Impostazioni = ({
       await updateCampaign(campaign.id, formData);
       await refreshCampaign();
       setEditing(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleDeleteP = async (id) => {
+    try {
+      await deletePlayer(id);
+      await refreshCampaign();
     } catch (error) {
       console.error(error);
     }
@@ -117,13 +131,13 @@ const Impostazioni = ({
                     <div className="flex flex-col items-center justify-center">
                       <div className="w-48 h-48 bg-second-background border-2 border-dashed border-[#333333] rounded-md flex flex-col items-center justify-center overflow-hidden">
                         <img
-                            src={
-                              form.imagePreview
+                          src={
+                            form.imagePreview
+                              ? form.imagePreview
                                 ? form.imagePreview
-                                  ? form.imagePreview
-                                  : `http://localhost:5034/${form.imagePreview.replace(/\\/g, "/")}`
-                                : "/forge.jpg"
-                            }
+                                : `http://localhost:5034/${form.imagePreview.replace(/\\/g, "/")}`
+                              : "/forge.jpg"
+                          }
                           alt="Character preview"
                           width={192}
                           height={192}
@@ -225,17 +239,28 @@ const Impostazioni = ({
             </div>
 
             <div className="space-y-2">
-              {campaign.players.map((player, index) => (
-                <div
-                  key={index}
-                  className="flex justify-between items-center p-3 bg-black/30 rounded-md border border-gold/10"
-                >
-                  <span className="text-white">{player.username}</span>
-                  <button className="bg-green-500/20 text-green-300 px-2 rounded-full">
-                    Accesso Completo
-                  </button>
-                </div>
-              ))}
+              {console.log(campaign.players)}
+              {campaign.players
+                .filter((player) => player.role === "Player")
+                .map((player, index) => (
+                  <div
+                    key={index}
+                    className="flex justify-between items-center p-3 bg-black/30 rounded-md border border-gold/10"
+                  >
+                    <span className="text-white">{player.username}</span>
+                    <div>
+                      <button className="bg-green-500/20 text-green-300 px-2 rounded-full">
+                        Accesso Completo
+                      </button>
+                      <Button
+                        className="text-red-500/50 hover:text-red-500"
+                        onClick={() => handleDeleteP(player.assignmenteId)}
+                      >
+                        <XLg />
+                      </Button>
+                    </div>
+                  </div>
+                ))}
             </div>
           </div>
           <div className="space-y-4">

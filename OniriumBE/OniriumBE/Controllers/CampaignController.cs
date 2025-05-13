@@ -446,6 +446,19 @@ namespace OniriumBE.Controllers
             return success ? Ok(new { message = "campagna eliminata!" }) : BadRequest(new { message = "Errore eliminando la campagna." });
         }
 
+
+        [HttpDelete("{assignment}/player/remove")]
+        public async Task<ActionResult> DeletePlayer([FromRoute] int assignment)
+        {
+            var success = await _playerServices.RemovePlayerAsync(assignment);
+            if (!success)
+            {
+                return NotFound();
+            }
+
+            return Ok(new { message = "player eliminato!" });
+        }
+
         [HttpPut("{campaignId}")]
         public async Task<IActionResult> UpdateCampaign([FromRoute] Guid campaignId, [FromForm] UpdateCampaign model)
         {
@@ -704,6 +717,7 @@ namespace OniriumBE.Controllers
                 return StatusCode(500, "Errore interno del server.");
             }
         }
+
 
 
         #endregion

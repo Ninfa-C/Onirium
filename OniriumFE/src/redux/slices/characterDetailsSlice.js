@@ -1,6 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { fetchCharacterById } from "../../api";
-import { getCharacterAssignment, getItemById, getSpellById } from "../../api/CampaignApi";
+import {
+  getCharacterAssignment,
+  getItemById,
+  getSpellById,
+} from "../../api/CampaignApi";
 
 export const getCharacterDetails = createAsyncThunk(
   "characterDetails/getCharacterDetails",
@@ -40,22 +44,61 @@ export const getUpdatedInventoryItems = createAsyncThunk(
           }
           return {
             ...item,
-              item: response,
-            }         
+            item: response,
+          };
         })
       );
       return {
-        ...characterAssign,
-        character:{
-          ...characterAssign.character,
-          inventory: updatedInventory},
-        isInventoryUpdated: true,
+        characterAssign,
+        weapons: updatedInventory.filter(
+          (i) => i.item?.itemCategory === "Arma"
+        ),
+        armor: updatedInventory.filter(
+          (i) => i.item?.itemCategory === "Armatura"
+        ),
+        magicItems: updatedInventory.filter(
+          (i) => i.item?.itemCategory === "Oggetto Magico"
+        ),
+        commonItems: updatedInventory.filter(
+          (i) =>
+            !["Arma", "Armatura", "Oggetto Magico"].includes(
+              i.item?.itemCategory
+            )
+        ),
       };
     } catch (error) {
       return rejectWithValue(error.message);
     }
   }
 );
+
+export const getUpdatedInventoryCategory = createAsyncThunk(
+  "characterDetails/getUpdatedInventoryCategory",
+  async ({ characterAssign, category }, { rejectWithValue }) => {
+    try {
+      const updatedItems = await Promise.all(
+        characterAssign.character.inventory.map(async (item) => {
+          try {
+            const response = await getItemById(item.itemId);
+            if (!response) return null;
+            return { ...item, item: response };
+          } catch {
+            return null;
+          }
+        })
+      );
+      const validItems = updatedItems.filter((i) => i !== null);      
+      const filtered = validItems.filter(
+        (item) => item.item?.itemCategory === category
+      );
+      
+      return { category, items: filtered };
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 
 export const getSpellsUpdate = createAsyncThunk(
   "characterDetails/getUpdatedSpells",
@@ -73,15 +116,16 @@ export const getSpellsUpdate = createAsyncThunk(
           return {
             ...item,
             spell: response,
-            }         
+          };
         })
       );
       return {
         ...characterAssign,
-        character:{
+        character: {
           ...characterAssign.character,
-          spells: updatedInventory},
-          isSpellUpdated: true,
+          spells: updatedInventory,
+        },
+        isSpellUpdated: true,
       };
     } catch (error) {
       return rejectWithValue(error.message);
@@ -89,15 +133,18 @@ export const getSpellsUpdate = createAsyncThunk(
   }
 );
 
-
 const characterDetailsSlice = createSlice({
   name: "characterDetails",
   initialState: {
     character: null,
+    weapons: [],
+    armor: [],
+    magicItems: [],
+    commonItems: [],
     loading: false,
     error: null,
-    isInventoryUpdated: false, 
-    isSpellUpdated: false
+    isInventoryUpdated: false,
+    isSpellUpdated: false,
   },
   reducers: {
     clearCharacterDetails: (state) => {
@@ -122,7 +169,7 @@ const characterDetailsSlice = createSlice({
       })
       .addCase(getCharacterAssign.pending, (state) => {
         state.loading = true;
-        state.error = null; 
+        state.error = null;
       })
       .addCase(getCharacterAssign.fulfilled, (state, action) => {
         state.loading = false;
@@ -139,13 +186,39 @@ const characterDetailsSlice = createSlice({
       .addCase(getUpdatedInventoryItems.fulfilled, (state, action) => {
         state.loading = false;
         state.characterAssign = {
-          ...action.payload,
+          ...action.payload.characterAssign,
           isInventoryUpdated: true,
         };
+        state.weapons = action.payload.weapons;
+        state.armor = action.payload.armor;
+        state.magicItems = action.payload.magicItems;
+        state.commonItems = action.payload.commonItems;
+      })
+      .addCase(getUpdatedInventoryCategory.fulfilled, (state, action) => {
+        const { category, items } = action.payload;
+        switch (category) {
+          case "Arma":
+            state.weapons = items;
+            break;
+          case "Armatura":
+            state.armor = items;
+            break;
+          case "Oggetto Magico":
+            state.magicItems = items;
+            break;
+          default:
+            state.commonItems = items;
+            break;
+        }
+      })
+      .addCase(getUpdatedInventoryCategory.rejected, (state, action) => {
+        state.error =
+          action.payload || "Errore nell'aggiornamento della categoria";
       })
       .addCase(getUpdatedInventoryItems.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload || "Errore durante l'aggiornamento dell'inventario";
+        state.error =
+          action.payload || "Errore durante l'aggiornamento dell'inventario";
       })
       .addCase(getSpellsUpdate.pending, (state) => {
         state.loading = true;
@@ -160,7 +233,8 @@ const characterDetailsSlice = createSlice({
       })
       .addCase(getSpellsUpdate.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload || "Errore durante l'aggiornamento degli incantesimi";
+        state.error =
+          action.payload || "Errore durante l'aggiornamento degli incantesimi";
       });
   },
 });

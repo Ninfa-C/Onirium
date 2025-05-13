@@ -133,6 +133,9 @@ export const getCampaignDetails = (id) =>
 export const deleCampaign = (id) => 
   fetchApi(`Campaign/${id}`, 'DELETE');
 
+export const deletePlayer = (id) => 
+  fetchApi(`Campaign/${id}/player/remove`, 'DELETE');
+
 export const updateCampaign = (id, formData) =>
   fetchApiWithFile(`Campaign/${id}`, 'PUT', formData);
 
